@@ -61,5 +61,19 @@
                 <h4 align='center'>Page 3 Footer</h4>
             </footer>
         </section>
+		
+		<section data-role="page" id="third" data-theme="a">
+            <header data-role="header" data-position="fixed"  data-add-back-btn="true">
+                <h1 align='center'>Page 4 Header</h1>
+            </header>
+ 
+            <article data-role="content">
+                <h2 align='center'>Demonstration Page</h2>
+            </article>
+ 
+            <footer data-role="footer" data-position="fixed">
+                <h4 align='center'>Page 4 Footer</h4>
+            </footer>
+        </section>
     </body>
 </html>
