@@ -1,0 +1,25 @@
+<aside 
+  class="bg-orange-600 text-white fixed h-[calc(100vh-4rem)] top-16 transition-all duration-300"
+  [class.w-64]="isExpanded"
+  [class.w-16]="!isExpanded"
+  (mouseenter)="expand()"
+  (mouseleave)="collapse()">
+  <nav class="mt-5">
+    <ul class="space-y-2 px-4">
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.route" 
+           routerLinkActive="bg-orange-700" 
+           [routerLinkActiveOptions]="item.exact ? {exact: true} : {}"
+           class="flex items-center p-3 rounded-lg hover:bg-orange-700 transition-colors">
+          <i [class]="item.icon + ' w-6'"></i>
+          <span class="transition-opacity duration-300"
+                [class.opacity-0]="!isExpanded"
+                [class.w-0]="!isExpanded"
+                [class.overflow-hidden]="!isExpanded">
+            {{item.label}}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

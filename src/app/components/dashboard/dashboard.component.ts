@@ -6,6 +6,8 @@ import { EventsTableComponent } from './components/events-table/events-table.com
 import { DonationChartComponent } from './components/donation-chart/donation-chart.component';
 import { DevoteeVisitsComponent } from './components/devotee-visits/devotee-visits.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AdminFooterComponent } from './components/admin-footer/admin-footer.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +19,11 @@ import { UserMenuComponent } from './components/user-menu/user-menu.component';
     EventsTableComponent,
     DonationChartComponent,
     DevoteeVisitsComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    SidebarComponent,
+    AdminFooterComponent
   ],
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {}

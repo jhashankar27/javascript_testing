@@ -1,15 +1,16 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd, provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { HeaderComponent } from './app/components/header/header.component';
 import { FooterComponent } from './app/components/footer/footer.component';
 import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
   template: `
     <ng-container *ngIf="!isAdminRoute; else adminContent">
       <app-header />
@@ -33,3 +34,9 @@ export class App {
     });
   }
 }
+
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(routes)
+  ]
+}).catch(err => console.error(err));

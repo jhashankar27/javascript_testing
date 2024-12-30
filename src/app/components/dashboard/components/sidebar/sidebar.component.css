@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.sidebar-link {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
