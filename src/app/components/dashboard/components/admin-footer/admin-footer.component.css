@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.version-text {
+  transition: opacity 0.2s ease;
+}
+
+.version-text:hover {
+  opacity: 0.8;
+}

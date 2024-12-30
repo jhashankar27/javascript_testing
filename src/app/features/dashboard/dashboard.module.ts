@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
-import { DonationChartComponent } from './components/donation-chart/donation-chart.component';
+import { StatisticsComponent } from '../../components/dashboard/components/statistics/statistics.component';
+import { DonationChartComponent } from '../../components/dashboard/components/donation-chart/donation-chart.component';
 import { DevoteeVisitsComponent } from '../../components/dashboard/components/devotee-visits/devotee-visits.component';
 import { EventsTableComponent } from '../../components/dashboard/components/events-table/events-table.component';
 import { SidebarComponent } from '../../components/dashboard/components/sidebar/sidebar.component';
@@ -12,18 +12,18 @@ import { AdminFooterComponent } from '../../components/dashboard/components/admi
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    StatisticsComponent,
-    DonationChartComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: DashboardComponent }]),
+    StatisticsComponent,
+    DonationChartComponent,
     DevoteeVisitsComponent,
     EventsTableComponent,
     SidebarComponent,
     UserMenuComponent,
-    AdminFooterComponent,
-  ],
+    AdminFooterComponent
+  ]
 })
 export class DashboardModule {}

@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.slider-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.slider-content.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-dot {
+  transition: all 0.3s ease;
+}
+
+.nav-dot:hover {
+  transform: scale(1.2);
+}

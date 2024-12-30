@@ -13,12 +13,14 @@
 
     <div class="flex-1 ml-16 transition-all duration-300 flex flex-col">
       <main class="flex-grow p-6">
-        <app-statistics class="mb-8"></app-statistics>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <app-statistics></app-statistics>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
           <app-donation-chart></app-donation-chart>
           <app-devotee-visits></app-devotee-visits>
         </div>
-        <app-events-table></app-events-table>
+        <div class="mt-8">
+          <app-events-table></app-events-table>
+        </div>
       </main>
       <app-admin-footer></app-admin-footer>
     </div>

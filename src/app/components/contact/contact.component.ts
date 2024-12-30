@@ -6,44 +6,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <div class="container mx-auto px-4 py-8">
-      <h1 class="text-3xl font-bold text-orange-600 mb-6">Contact Us</h1>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Get in Touch</h2>
-          <form class="space-y-4" (ngSubmit)="onSubmit()">
-            <div>
-              <label class="block text-gray-700 mb-2">Name</label>
-              <input type="text" [(ngModel)]="formData.name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-orange-500" required>
-            </div>
-            <div>
-              <label class="block text-gray-700 mb-2">Email</label>
-              <input type="email" [(ngModel)]="formData.email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-orange-500" required>
-            </div>
-            <div>
-              <label class="block text-gray-700 mb-2">Message</label>
-              <textarea [(ngModel)]="formData.message" name="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-orange-500" required></textarea>
-            </div>
-            <button type="submit" class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700">Send Message</button>
-          </form>
-        </div>
-
-        <div class="space-y-6">
-          <div class="bg-orange-50 p-6 rounded-lg">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Temple Address</h2>
-            <p class="text-gray-600">123 Temple Street<br>City, State 12345</p>
-          </div>
-          
-          <div class="bg-orange-50 p-6 rounded-lg">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contact Information</h2>
-            <p class="text-gray-600">Phone: +91 9876543210<br>Email: info&#64;hindutemple.in</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
   formData = {
@@ -53,9 +17,7 @@ export class ContactComponent {
   };
 
   onSubmit() {
-    // Handle form submission
     console.log('Form submitted:', this.formData);
-    // Reset form
     this.formData = {
       name: '',
       email: '',

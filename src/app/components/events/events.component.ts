@@ -5,27 +5,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-events',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="container mx-auto px-4 py-8">
-      <h2 class="text-3xl font-bold text-orange-600 mb-8">Upcoming Events</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (event of events; track event.id) {
-          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img
-              [src]="event.image"
-              [alt]="event.title"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-4">
-              <h3 class="font-bold text-lg mb-2">{{ event.title }}</h3>
-              <p class="text-gray-600 mb-2">{{ event.date }}</p>
-              <p class="text-gray-700">{{ event.description }}</p>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-  `
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.css']
 })
 export class EventsComponent {
   events = [

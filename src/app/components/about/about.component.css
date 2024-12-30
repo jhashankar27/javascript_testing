@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.activity-list li {
+  transition: padding-left 0.2s ease;
+}
+
+.activity-list li:hover {
+  padding-left: 0.5rem;
+}
