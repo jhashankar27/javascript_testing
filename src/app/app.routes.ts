@@ -5,6 +5,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { EventsComponent } from './components/events/events.component';
 import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,5 +15,10 @@ export const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'events', component: EventsComponent },
   { path: 'login', component: LoginComponent },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '' }
 ];

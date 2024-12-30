@@ -20,12 +20,23 @@ import { HeroSlide } from './hero-slide.interface';
             [alt]="slide.title"
             class="w-full h-full object-cover"
           />
-          <div class="absolute inset-0 bg-black opacity-40"></div>
-          <div class="relative container mx-auto px-4 h-full flex items-center">
-            <div class="text-white max-w-2xl">
-              <h1 class="text-5xl font-bold mb-4">{{ slide.title }}</h1>
-              <p class="text-xl mb-4">{{ slide.subtitle }}</p>
-              <p class="text-lg text-gray-200">{{ slide.description }}</p>
+          <!-- Darker overlay for better text visibility -->
+          <div class="absolute inset-0 bg-black opacity-60"></div>
+          
+          <!-- Content container with better positioning -->
+          <div class="absolute inset-0 flex items-center">
+            <div class="container mx-auto px-4">
+              <div class="max-w-2xl text-white space-y-6">
+                <h1 class="text-5xl font-bold text-white drop-shadow-lg">
+                  {{ slide.title }}
+                </h1>
+                <h2 class="text-2xl font-semibold text-orange-300 drop-shadow-md">
+                  {{ slide.subtitle }}
+                </h2>
+                <p class="text-lg text-gray-100 drop-shadow-md leading-relaxed">
+                  {{ slide.description }}
+                </p>
+              </div>
             </div>
           </div>
         </div>

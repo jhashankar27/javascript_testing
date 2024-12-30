@@ -1,26 +1,35 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Component } from '@angular/core';
-import { RouterOutlet, provideRouter } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { routes } from './app/app.routes';
 import { HeaderComponent } from './app/components/header/header.component';
 import { FooterComponent } from './app/components/footer/footer.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   template: `
-    <div class="min-h-screen flex flex-col">
+    <ng-container *ngIf="!isAdminRoute; else adminContent">
       <app-header />
       <router-outlet />
       <app-footer />
-    </div>
+    </ng-container>
+    
+    <ng-template #adminContent>
+      <router-outlet />
+    </ng-template>
   `
 })
-export class App {}
+export class App {
+  isAdminRoute = false;
 
-bootstrapApplication(App, {
-  providers: [
-    provideRouter(routes)
-  ]
-});
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.isAdminRoute = event.url.includes('/dashboard');
+    });
+  }
+}

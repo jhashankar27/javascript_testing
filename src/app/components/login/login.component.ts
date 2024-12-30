@@ -22,7 +22,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     } else {
       this.error = 'Invalid credentials';
     }

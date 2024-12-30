@@ -1,0 +1,33 @@
+<div class="relative">
+  <button 
+    (click)="toggleMenu()" 
+    class="flex items-center space-x-3 focus:outline-none"
+  >
+    <div class="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center">
+      <i class="fas fa-user text-orange-600"></i>
+    </div>
+    <div class="hidden md:block text-right">
+      <div class="text-sm font-medium text-gray-700">Temple Administrator</div>
+      <div class="text-xs text-gray-500">admin&#64;hindutemple.in</div>
+    </div>
+    <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div *ngIf="isMenuOpen" 
+       class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+    <a routerLink="/dashboard/profile" 
+       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+      <i class="fas fa-user-circle mr-2"></i>Profile
+    </a>
+    <a routerLink="/dashboard/settings" 
+       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+      <i class="fas fa-cog mr-2"></i>Settings
+    </a>
+    <div class="border-t border-gray-100"></div>
+    <button (click)="logout()" 
+            class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+      <i class="fas fa-sign-out-alt mr-2"></i>Logout
+    </button>
+  </div>
+</div>
