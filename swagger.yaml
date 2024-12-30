@@ -1,0 +1,373 @@
+openapi: 3.0.0
+info:
+  title: Hindu Temple Website API
+  description: API documentation for Hindu Temple Website
+  version: 1.0.0
+  contact:
+    email: info@hindutemple.in
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+          example: temple123
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            role:
+              type: string
+              enum: [admin, user]
+
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [upcoming, ongoing, completed]
+        imageUrl:
+          type: string
+
+    Update:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        category:
+          type: string
+          enum: [news, announcement, update]
+
+    DonationStats:
+      type: object
+      properties:
+        totalAmount:
+          type: number
+        monthlyData:
+          type: array
+          items:
+            type: object
+            properties:
+              month:
+                type: string
+              amount:
+                type: number
+
+    DevoteeStats:
+      type: object
+      properties:
+        totalDevotees:
+          type: number
+        dailyVisits:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+              count:
+                type: number
+
+paths:
+  # Public Endpoints
+  /events:
+    get:
+      summary: Get all events
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [upcoming, ongoing, completed]
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+
+  /updates:
+    get:
+      summary: Get latest updates
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of updates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Update'
+
+  # Authentication
+  /auth/login:
+    post:
+      summary: Login to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # Dashboard Endpoints
+  /dashboard/stats:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get dashboard statistics
+      responses:
+        '200':
+          description: Dashboard statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalDevotees:
+                    type: number
+                  totalDonations:
+                    type: number
+                  activeEvents:
+                    type: number
+                  todayVisitors:
+                    type: number
+
+  /dashboard/donations:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get donation statistics
+      parameters:
+        - in: query
+          name: period
+          schema:
+            type: string
+            enum: [daily, weekly, monthly, yearly]
+      responses:
+        '200':
+          description: Donation statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonationStats'
+
+  /dashboard/devotees:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get devotee visit statistics
+      parameters:
+        - in: query
+          name: period
+          schema:
+            type: string
+            enum: [daily, weekly, monthly]
+      responses:
+        '200':
+          description: Devotee statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevoteeStats'
+
+  # Admin Event Management
+  /admin/events:
+    post:
+      security:
+        - BearerAuth: []
+      summary: Create new event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          description: Event created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+
+  /admin/events/{id}:
+    put:
+      security:
+        - BearerAuth: []
+      summary: Update event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Event updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+
+    delete:
+      security:
+        - BearerAuth: []
+      summary: Delete event
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Event deleted
+
+  # Admin Update Management
+  /admin/updates:
+    post:
+      security:
+        - BearerAuth: []
+      summary: Create new update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Update'
+      responses:
+        '201':
+          description: Update created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update'
+
+  /admin/updates/{id}:
+    put:
+      security:
+        - BearerAuth: []
+      summary: Update an update
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Update'
+      responses:
+        '200':
+          description: Update modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Update'
+
+    delete:
+      security:
+        - BearerAuth: []
+      summary: Delete an update
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Update deleted
