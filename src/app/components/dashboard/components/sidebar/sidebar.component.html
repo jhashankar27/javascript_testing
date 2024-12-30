@@ -9,7 +9,7 @@
       <li *ngFor="let item of menuItems">
         <a [routerLink]="item.route" 
            routerLinkActive="bg-orange-700" 
-           [routerLinkActiveOptions]="item.exact ? {exact: true} : {}"
+           [routerLinkActiveOptions]="{exact: item.exact || false}"
            class="flex items-center p-3 rounded-lg hover:bg-orange-700 transition-colors">
           <i [class]="item.icon + ' w-6'"></i>
           <span class="transition-opacity duration-300"

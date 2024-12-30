@@ -15,15 +15,15 @@ import { AdminFooterComponent } from '../../components/dashboard/components/admi
     DashboardComponent,
     StatisticsComponent,
     DonationChartComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild([{ path: '', component: DashboardComponent }]),
     DevoteeVisitsComponent,
     EventsTableComponent,
     SidebarComponent,
     UserMenuComponent,
     AdminFooterComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([{ path: '', component: DashboardComponent }]),
   ],
 })
 export class DashboardModule {}
