@@ -1,24 +1,35 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { GalleryComponent } from './components/gallery/gallery.component';
-import { EventsComponent } from './components/events/events.component';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './core/guards';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'gallery', component: GalleryComponent },
-  { path: 'events', component: EventsComponent },
-  { path: 'login', component: LoginComponent },
-  { 
-    path: 'dashboard', 
-    component: DashboardComponent,
-    canActivate: [authGuard]
+  {
+    path: '',
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./features/contact/contact.module').then(m => m.ContactModule)
+  },
+  {
+    path: 'gallery',
+    loadChildren: () => import('./features/gallery/gallery.module').then(m => m.GalleryModule)
+  },
+  {
+    path: 'events',
+    loadChildren: () => import('./features/events/events.module').then(m => m.EventsModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   { path: '**', redirectTo: '' }
 ];
