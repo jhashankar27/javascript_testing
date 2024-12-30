@@ -1,0 +1,36 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-about',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-orange-600 mb-6">About Our Temple</h1>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold text-gray-800">Our History</h2>
+          <p class="text-gray-600">Founded in 1950, our temple has been serving the community for over seven decades. We are dedicated to preserving and promoting Hindu culture and spirituality.</p>
+          
+          <h2 class="text-2xl font-semibold text-gray-800">Our Mission</h2>
+          <p class="text-gray-600">To provide a sacred space for worship, spiritual growth, and cultural education while fostering a sense of community among devotees.</p>
+        </div>
+        
+        <div class="bg-orange-50 p-6 rounded-lg">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Temple Activities</h2>
+          <ul class="space-y-2 text-gray-600">
+            <li>• Daily Pujas and Archanas</li>
+            <li>• Weekly Bhajan Sessions</li>
+            <li>• Cultural Programs</li>
+            <li>• Vedic Education Classes</li>
+            <li>• Community Services</li>
+            <li>• Festival Celebrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `
+})
+export class AboutComponent {}

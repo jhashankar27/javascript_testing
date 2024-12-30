@@ -3,14 +3,18 @@ import { Component } from '@angular/core';
 import { RouterOutlet, provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { HeaderComponent } from './app/components/header/header.component';
+import { FooterComponent } from './app/components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   template: `
-    <app-header />
-    <router-outlet />
+    <div class="min-h-screen flex flex-col">
+      <app-header />
+      <router-outlet />
+      <app-footer />
+    </div>
   `
 })
 export class App {}
