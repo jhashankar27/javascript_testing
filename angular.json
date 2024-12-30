@@ -26,10 +26,19 @@
             }
           },
           "options": {
-            "assets": [],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
+			  "src/assets"
+            ],
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "outputPath": "dist/demo",
+            "outputPath": {
+              "base": "dist/demo",
+              "browser": ""
+            },
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": ["src/global_styles.css"],
